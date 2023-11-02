@@ -216,6 +216,7 @@ def discrete_mutual_info(mus, ys):
     """
     num_codes = mus.shape[0]
     num_factors = ys.shape[0]
+    print(num_codes,num_factors)
     m = np.zeros([num_codes, num_factors])
     for i in range(num_codes):
         for j in range(num_factors):
