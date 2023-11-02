@@ -378,17 +378,17 @@ class DisentDataset(Dataset, LengthIter):
 
     # TODO: batches should be obtained from indices
     #       - the wrapped gt datasets should handle generating these indices, eg. factor traversals etc.
-
     @groundtruth_only
     def dataset_batch_from_factors(self, factors: np.ndarray, mode: str, collate: bool = True):
         """Get a batch of observations X from a batch of factors Y."""
         indices = self.gt_data.pos_to_idx(factors)
         return self.dataset_batch_from_indices(indices, mode=mode, collate=collate)
     @groundtruth_only
-    def custom_dataset_sample_batch_with_factors(self, num_samples: int,f_idxs, mode: str, collate: bool = True):
+    def custom_dataset_sample_batch_with_factors(self, num_samples: int, mode: str, collate: bool = True):
         """Sample a batch of observations X and factors Y."""
-        factors = self.gt_data.sample_factors(num_samples,f_idxs)
-        batch = self.dataset_batch_from_factors(factors, mode=mode, collate=collate)
+        indices=np.random.randint(0, len(self._dataset), size=num_samples)
+        factors = self.gt_data.sample_factors(indices,self._factors)
+        batch = self.dataset_batch_from_indices(indices, mode=mode, collate=collate)
         return batch, (default_collate(factors) if collate else factors)
     @groundtruth_only
     def dataset_sample_batch_with_factors(self, num_samples: int, mode: str, collate: bool = True):

@@ -210,7 +210,9 @@ class StateSpace(LengthIter):
 
     def sample_indices(self, size=None):
         return np.random.randint(0, len(self), size=size)
-
+    def sample_factors_from_indices(self,indices,factors):
+        batch = [factors[idx] for idx in indices]
+        return batch
     def sample_factors(self, size=None, f_idxs: Optional[NonNormalisedFactorIdxs] = None) -> np.ndarray:
         """
         sample randomly from all factors, otherwise the given factor_indices.
