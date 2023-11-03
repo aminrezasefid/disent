@@ -82,6 +82,7 @@ def metric_dci(
     )
 
     log.debug("Computing DCI metric.")
+    print(mus_train.shape,ys_train.shape)
     scores = _compute_dci(mus_train, ys_train, mus_test, ys_test, boost_mode=boost_mode, show_progress=show_progress)
 
     return scores
