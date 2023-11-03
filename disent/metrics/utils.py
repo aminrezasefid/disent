@@ -140,7 +140,7 @@ def generate_batch_factor_code(
     with tqdm(total=num_points, disable=not show_progress) as bar:
         while i < num_points:
             num_points_iter = min(num_points - i, batch_size)
-            current_observations, current_factors = dataset.custom_dataset_sample_batch_with_factors(
+            current_observations, current_factors = dataset.dataset_sample_batch_with_factors(
                 num_points_iter, mode="input"
             )
             if i == 0:
