@@ -97,6 +97,7 @@ class DisentDataset(Dataset, LengthIter):
     def __init__(
         self,
         dataset: Union[Dataset, GroundTruthData],  # TODO: this should be renamed to data
+        factors,
         sampler: Optional[BaseDisentSampler] = None,
         transform: Optional[callable] = None,
         augment: Optional[callable] = None,
@@ -106,6 +107,7 @@ class DisentDataset(Dataset, LengthIter):
         super().__init__()
         # save attributes
         self._dataset = dataset
+        self._factors = factors
         self._sampler = SingleSampler() if (sampler is None) else sampler
         self._transform = transform
         self._augment = augment
