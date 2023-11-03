@@ -387,7 +387,7 @@ class DisentDataset(Dataset, LengthIter):
     def custom_dataset_sample_batch_with_factors(self, num_samples: int, mode: str, collate: bool = True):
         """Sample a batch of observations X and factors Y."""
         indices=np.random.randint(0, len(self._dataset), size=num_samples)
-        factors = self.gt_data.sample_factors(indices,self._factors)
+        factors = self.gt_data.sample_factors_from_indices(indices,self._factors)
         batch = self.dataset_batch_from_indices(indices, mode=mode, collate=collate)
         return batch, (default_collate(factors) if collate else factors)
     @groundtruth_only
